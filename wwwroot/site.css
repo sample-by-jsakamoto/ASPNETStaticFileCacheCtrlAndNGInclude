@@ -1,0 +1,22 @@
+﻿body {
+    font-size: 10.5pt;
+    font-family: Verdana, Roboto, "Droid Sans", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+}
+
+.view-holder {
+    border: solid 1px silver;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+button {
+    border: none;
+    background-color: #0094ff;
+    color: white;
+    padding: 1rem 2rem;
+    cursor: pointer;
+}
+
+    button:hover {
+        background-color: #3babfc;
+    }

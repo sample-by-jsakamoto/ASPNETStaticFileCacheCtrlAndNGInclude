@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>ASP.NET Static File Cache Controll and AngularJS Include</title>
+    <link href="site.css" rel="stylesheet" />
+</head>
+<body ng-app="app" ng-controller="mainController as ctrl">
+
+    <div>
+        <input type="radio" id="btn-datetime-view" ng-model="ctrl.viewName" value="views/date-time.html" />
+        <label for="btn-datetime-view">change view to 'date-time.html'</label>
+    </div>
+    <div>
+        <input type="radio" id="btn-time-view" ng-model="ctrl.viewName" value="views/time.html" />
+        <label for="btn-time-view">change view to 'time.html'</label>
+    </div>
+
+    <div class="view-holder" ng-include="ctrl.viewName">
+    </div>
+
+    <div>
+        <button ng-click="ctrl.updateViews()">
+            Update 'date-time.html' and 'time.html'.
+        </button>
+    </div>
+
+    <script src="scripts/angular.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
