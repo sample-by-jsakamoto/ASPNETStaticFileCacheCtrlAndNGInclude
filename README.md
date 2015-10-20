@@ -1,8 +1,9 @@
 # Sample: ASP.NET/IIS - Static File Cache Control and AngularJS "ng-include" / 静的ファイルのキャッシュ制御と AngularJS の "ng-include"
 
-[![Deploy to Azure](https://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
 
 ## master branch - reproduction of problem / 問題の再現
+
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/?repository=https://github.com/sample-by-jsakamoto/ASPNETStaticFileCacheCtrlAndNGInclude)
 
 On IE11 or Edge Web browser, If you reload the this Web site contents after click "Update 'date-time.html' and 'time.html'." button, you can see **'time.html' is still old content.**
 
@@ -12,7 +13,9 @@ IE11 または Edge Web ブラウザで、このリポジトリの Web サイト
 
 この問題は、`cache-control` ヘッダが無い場合の IE/Edge の実装によって発生するものと思われます。
 
-## resolve/by-configure-iis-settings branch
+## resolve-by-configure-iis-settings branch
+
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/?repository=https://github.com/sample-by-jsakamoto/ASPNETStaticFileCacheCtrlAndNGInclude/tree/resolve-by-configure-iis-settings)
 
 This problem can resolve by configure web.config to set `cacheControlMode` attrbite in `clientCache` node to `DisableCache`.
 
