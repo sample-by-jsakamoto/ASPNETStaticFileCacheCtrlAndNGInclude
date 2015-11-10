@@ -25,6 +25,26 @@ After this configuration, IE/Edge send request with `If-Modified-Since` header a
 
 この設定変更後は、IE/Edge は期待どおり `If-Modified-Since` ヘッダ付きで要求を送信するようになり、そして HTTP 200 OK または 304 Not Modified を受け取るようになります。
 
+## resolve-by-customize-xhr-header branch
+
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/?repository=https://github.com/sample-by-jsakamoto/ASPNETStaticFileCacheCtrlAndNGInclude/tree/resolve-by-customize-xhr-header)
+
+This problem can also resolve at client side scripts by [configure AngularJS's `$httpProvider`](https://github.com/sample-by-jsakamoto/ASPNETStaticFileCacheCtrlAndNGInclude/commit/2f5597bda532590f01d6d33a634d59f3d0a56f06#diff-a8e1a387f4075e9b4c712abf91923299R18).
+
+If you configure `$httpProvider` to append "If-Modified-Since: Thu, 01 Jan 1970 00:00:00 GMT" request header with any HTTP GET requets which sent XHR object, then always send requets from XHR obbjects to server.
+
+**But this method has performance issue**, because server could not get chance to respond HTTP304 Not Modified status without content body.  
+It effects all HTTP GET requets that from XHR object.
+
+この問題はクライアント側スクリプトにて、[AngularJS の `$httpProvider` を構成](https://github.com/sample-by-jsakamoto/ASPNETStaticFileCacheCtrlAndNGInclude/commit/2f5597bda532590f01d6d33a634d59f3d0a56f06#diff-a8e1a387f4075e9b4c712abf91923299R18)することでも解決できます。
+
+XHR オブジェクトから送信されるすべての HTTP GET 要求に "If-Modified-Since: Thu, 01 Jan 1970 00:00:00 GMT" 要求ヘッダを追加するよう `$httpProvider` を構成すると、以後は XHR オブジェクトは常にサーバー側へ要求を送信するようになります。
+
+**しかしこの方法は処理性能上の問題があります。**  
+なぜならサーバー側からは、返信本体を省いた HTTP304 Not Modified ステータスで応答する機会がなくなるからです。  
+このことは XHR オブジェクトから送信されるすべての HTTP GET 要求に影響します。
+
+
 ## problem-2-when-enable-staticfilehandler branch
 
 [![Deploy to Azure](https://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/?repository=https://github.com/sample-by-jsakamoto/ASPNETStaticFileCacheCtrlAndNGInclude/tree/problem-2-when-enable-staticfilehandler)
@@ -40,3 +60,15 @@ Visual Studio の Browser Link 機能を有効化するために、.html ファ�
 This problem can resolve by configure web.config to enable `runAllManagedModulesForAllRequests` settings, and remove handlers setting of System.Web.StaticFileHandler for .html files.
 
 この問題は、web.config の `runAllManagedModulesForAllRequests` 設定を有効化して、.html ファイルに対する System.Web.StaticFileHanlder を handlers 設定から削除することで解決できます。
+
+## resolve2-by-customize-xhr-header branch
+
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/?repository=https://github.com/sample-by-jsakamoto/ASPNETStaticFileCacheCtrlAndNGInclude/tree/resolve2-by-customize-xhr-header)
+
+This problem can also resolve at client side scripts by [configure AngularJS's `$httpProvider`](https://github.com/sample-by-jsakamoto/ASPNETStaticFileCacheCtrlAndNGInclude/commit/8d37e7eb624f4f9cf26dc0568162f8d10863fc8c#diff-a8e1a387f4075e9b4c712abf91923299R18), too.
+
+But don't forget about this method has performance issue.
+
+この問題も、クライアント側スクリプトにて、[AngularJS の `$httpProvider` を構成](https://github.com/sample-by-jsakamoto/ASPNETStaticFileCacheCtrlAndNGInclude/commit/8d37e7eb624f4f9cf26dc0568162f8d10863fc8c#diff-a8e1a387f4075e9b4c712abf91923299R18)することでも解決できます。
+
+但しこの方法は処理性能上の問題があることをお忘れなく。
