@@ -17,5 +17,10 @@ var ASPNETStaticFileCacheCtrlAndNGInclude;
     })();
     angular
         .module('app', [])
+        .config(function ($httpProvider) {
+        if (!$httpProvider.defaults.headers.get)
+            $httpProvider.defaults.headers.get = {};
+        $httpProvider.defaults.headers.get['If-Modified-Since'] = (new Date(0)).toUTCString();
+    })
         .controller('mainController', MainController);
 })(ASPNETStaticFileCacheCtrlAndNGInclude || (ASPNETStaticFileCacheCtrlAndNGInclude = {}));

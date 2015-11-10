@@ -18,5 +18,11 @@
 
     angular
         .module('app', [])
+        .config(($httpProvider: ng.IHttpProvider) => {
+            // Anti IE cache
+            if (!$httpProvider.defaults.headers.get)
+                $httpProvider.defaults.headers.get = <() => string>{};
+            $httpProvider.defaults.headers.get['If-Modified-Since'] = (new Date(0)).toUTCString();
+        })
         .controller('mainController', MainController);
 }
